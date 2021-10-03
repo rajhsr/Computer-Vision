@@ -79,7 +79,7 @@ cd = ColorDescriptor((8, 12, 3))
 
 i=0
 n=len(Image_Front.index);
-output = open('index1.csv', "w") # write the dataset file
+output = open('index.csv', "w") # write the dataset file
 n_final=0;
 while i<n :
 		url=Image_Front.iloc[i,0]
