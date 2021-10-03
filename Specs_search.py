@@ -142,9 +142,49 @@ query = cv2.imread('query_img.jpg')
 queryFeatures = cd.describe(query)
 results = search(Data_features,queryFeatures,10)
 cv2_imshow(query)
-
+count_eyeframe=0
+count_sunglasses=0
+count_NonPowerReading=0
+count_Rectangle=0
+count_Aviator=0
+count_Wayfarer=0
+count_Oval=0
 for i in results:
  imageID = urllib.request.urlretrieve(image_link.iloc[i,0],"dataset_img.jpg")
+ if parent_category.iloc[i,0]=='eyeframe':
+    count_eyeframe=count_eyeframe+1
+ elif parent_category.iloc[i,0]=='sunglasses':
+    count_sunglasses=count_sunglasses+1
+ elif parent_category.iloc[i,0]=='Non-Power Reading':
+    count_NonPowerReading=count_NonPowerReading+1
+
+ if frame_shape.iloc[i,0]=='Rectangle':
+    count_Rectangle=count_Rectangle+1
+ elif frame_shape.iloc[i,0]=='Aviator':
+    count_Aviator=count_Aviator+1
+ elif frame_shape.iloc[i,0]=='Wayfarer':
+    count_Wayfarer=count_Wayfarer+1
+ elif frame_shape.iloc[i,0]=='Oval':
+    count_Oval=count_Oval+1
  result = cv2.imread("dataset_img.jpg")
  cv2_imshow(result)
  cv2.waitKey(0)
+
+maximum_parentcat=max([count_eyeframe,count_sunglasses,count_NonPowerReading])
+maximum_frameshape=max([count_Rectangle,count_Aviator,count_Wayfarer,count_Oval])
+
+if maximum_parentcat==count_eyeframe:
+    print('Parent Category: eyeframe')
+elif maximum_parentcat==count_sunglasses:
+    print('Parent Category: sunglasses')
+elif maximum_parentcat==count_NonPowerReading:
+    print('Parent Category: Non-Power Reading')
+
+if maximum_frameshape==count_Rectangle:
+    print('Frame Shape: Rectangle')
+elif maximum_frameshape==count_Aviator:
+    print('Frame Shape: Aviator')
+elif maximum_frameshape==count_Wayfarer:
+    print('Frame Shape: Wayfarer')
+elif maximum_frameshape==count_Oval:
+    print('Frame Shape: Oval')
